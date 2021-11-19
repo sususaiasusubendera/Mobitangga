@@ -294,10 +294,13 @@ void PrintBackward (List L){
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
 int Rskill (List *L){
-	int a;
-	srand(time(0));
-	a = rand() % 10;
-	return a;
+	int a, i, result;
+	srand((unsigned) (time(0)));
+	for (i = 1; i < 10; i++){
+		a = rand() % 10;
+	}
+	result = (result + a) % 10;
+	return result;
 };
 /* 
 1. Pintu Ga Ke Mana Mana 10%, 0
@@ -326,10 +329,10 @@ void DelIndex (List *L, int n){
 	P = First(*L);
 	i = 0;
 	if (n == 1){
-		DelFirst(L, P);
+		DelFirst(L, &P);
 	}
 	else if (n == NbElmt(*L)){
-		DelLast(L, P);
+		DelLast(L, &Last(*L));
 	}
 	else {
 		while (i < n){
@@ -337,45 +340,47 @@ void DelIndex (List *L, int n){
 			P = Next(P);
 		}
 		P = Prev(P);
-		DelAfter(L, P, Prev(P));
+		DelAfter(L, &P, Prev(P));
 	}
 };
 
 void NambahSkill (List *L, int a){
 	int skill;
-	if (a == 0){
-		skill = 1;
-        printf("Pintu Ga Ke Mana-Mana\n");
-    }
-    else if (a == 1){ 
-        skill = 2;
-        printf("Cermin Pengganda\n");
-    }
-    else if (a == 2 || a == 3){ 
-        skill = 3;
-        printf("Senter Pembesar Hoki\n");
-    }
-    else if (a == 4 || a == 5){ 
-        skill = 4;
-        printf("Senter Pengecil Hoki\n");
-    }
-    else if (a == 6){ 
-        skill = 5;
-        printf("Mesin Penukar Hoki\n");
-    }  
-    else if (a >= 7){ 
-        skill = 0; // skill 6 tidak masuk ke dalam list
-        printf("Teknologi Gagal\n");
-    }    
+	if (NbElmt(*L) < 10){
+		if (a == 0){
+			skill = 1;
+        	printf("Pintu Ga Ke Mana-Mana\n");
+    	}
+    	else if (a == 1){ 
+        	skill = 2;
+        	printf("Cermin Pengganda\n");
+    	}
+    	else if (a == 2 || a == 3){ 
+        	skill = 3;
+        	printf("Senter Pembesar Hoki\n");
+    	}
+    	else if (a == 4 || a == 5){ 
+        	skill = 4;
+        	printf("Senter Pengecil Hoki\n");
+    	}
+    	else if (a == 6){ 
+        	skill = 5;
+        	printf("Mesin Penukar Hoki\n");
+    	}  
+    	else if (a >= 7){ 
+        	skill = 0; // skill 6 tidak masuk ke dalam list
+        	printf("Teknologi Gagal\n");
+    	}
+	}
 
-    if (skill != 0 && NbElmt(*L) <= 10){
+    if (skill != 0 && NbElmt(*L) < 10){
         InsVLast(L, skill);
         printf("Skill ");
         printf("%d", skill);
         printf(" berhasil dimasukkan\n");
     } 
     else if (skill == 0){
-        printf("Sayang sekali Anda mendapatkan teknologi gagal :( \n");
+        printf("Yahh ga dapet skill, kacian :(\n");
     }
     else { // NbElmt(*L) > 10
         printf("Jumlah skill yang dimiliki sudah mencapai maksimum\n");
@@ -384,10 +389,10 @@ void NambahSkill (List *L, int a){
 
 void BuangSkill (List *L, int a){
 	if (IsEmpty(*L)) {
-        printf("Anda tidak mempunyai skill \n");    
+        printf("Anda tidak mempunyai skill\n");    
     }
     else {
-        x = abs(x);
-        DelI(L, x);
+        a = abs(a);
+        DelIndex(L, a);
     }
 };
