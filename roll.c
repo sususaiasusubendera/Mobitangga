@@ -28,12 +28,3 @@ int rollDadu(int buff){
 	result = ((result + Roll) % ((MaxRoll - MinRoll + 1)) + MinRoll);
 	return result;
 }
-
-int main(){
-	int buff, roll, i;
-	buff = 4;
-	for (i = 0; i < 5; i++){
-		roll = rollDadu(buff);
-		printf("%d\n", roll);
-	}
-}
