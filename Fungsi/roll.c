@@ -10,6 +10,7 @@ buff = 5 -> Mesin Penukar Posisi
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include "roll.h"
 
 int rollDadu(int buff, int N){
 	int MaxRoll, MinRoll, Roll, i, result;
