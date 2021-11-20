@@ -146,4 +146,6 @@ void NambahSkill (List *L, int a);
 
 void BuangSkill (List *L, int a);
 
+void PrintSkill (List L);
+
 #endif
