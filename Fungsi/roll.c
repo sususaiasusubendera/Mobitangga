@@ -12,12 +12,11 @@ buff = 5 -> Mesin Penukar Posisi
 #include <time.h>
 #include "roll.h"
 
-int rollDadu(int buff, int N){
-	int MaxRoll, MinRoll, Roll, i, result;
-	MaxRoll = N-1;
+int rollDadu(int buff, int MaxRoll){
+	int MinRoll, Roll, i, result;
 	MinRoll = 1;
 	if (buff == 3){
-		MinRoll = floor(MaxRoll/2) ;
+		MinRoll = floor(MaxRoll/2);
 	}
 	else if (buff == 4){
 		MaxRoll = floor(MaxRoll/2);
