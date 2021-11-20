@@ -396,3 +396,32 @@ void BuangSkill (List *L, int a){
         DelIndex(L, a);
     }
 };
+
+void PrintSkill (List L){
+	int i;
+	address P;
+	i = 1;
+	P = First(L);
+	puts("Kamu memiliki skill:");
+	while (P != Nil){
+		printf("%d .", i);
+		if (Info(P) == 1){
+            printf("Pintu Ga Ke Mana Mana\n");
+        }
+        else if (Info(P) == 2){
+            printf("Cermin Pengganda\n");
+        }
+        else if (Info(P) == 3){
+            printf("Senter Pembesar Hoki\n");
+        }
+        else if (Info(P) == 4){
+            printf("Senter Pengecil Hoki\n");
+        }
+        else if (Info(P) == 5){
+            printf("Mesin Penukar Posisi\n");
+        }
+        P = Next(P);
+		i += 1;
+	}
+	printf("\n");
+};
