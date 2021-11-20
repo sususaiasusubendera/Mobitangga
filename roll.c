@@ -13,7 +13,7 @@ buff = 5 -> Mesin Penukar Posisi
 
 int rollDadu(int buff, int N){
 	int MaxRoll, MinRoll, Roll, i, result;
-	MaxRoll = N-1;
+	MaxRoll = floor(N/2);
 	MinRoll = 1;
 	if (buff == 3){
 		MinRoll = floor(MaxRoll/2) ;
