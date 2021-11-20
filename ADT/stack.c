@@ -1,7 +1,7 @@
 /* File : stack.c */
 /* Impelemntasi fungsi dari stack.h */
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "stack.h"
 #include <stdlib.h>
 
