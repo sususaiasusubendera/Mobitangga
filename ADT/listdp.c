@@ -332,7 +332,8 @@ void DelIndex (List *L, int n){
 		DelFirst(L, &P);
 	}
 	else if (n == NbElmt(*L)){
-		DelLast(L, &Last(*L));
+		P = Last(*L);
+		DelLast(L, &P);
 	}
 	else {
 		while (i < n){
