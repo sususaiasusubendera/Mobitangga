@@ -1,55 +1,51 @@
-/* implementasi dari map.h */
-
-#include <stdio.h>
-#include <stdlib.h>
 #include "map.h"
 #include "mesinkar.h"
 #include "mesinkata.h"
 
-
-/* ***** KONSTRUKTOR UNTUK MAP ***** */
-/* Konstruktor : create peta kosong */
-void MakeEmptyMap (Map *M)
-{
-    /* Kamus Lokal */
-
-    /* Algoritma */
-    (*M).Neff = 0;
-}
-
-
-/* ***** TES PETA KOSONG ***** */
-boolean IsEmptyMap (Map M)
-{
-    /* Kamus Lokal */
-
-    /* Algoritma */
-    return (M.Neff = 0);
-}
-
-
-/* ***** PROSES SEMUA ELEMEN ARRAY MAP ***** */
-void SalinMap (Map Mx, Map My)
-{
-    /* Kamus Lokal */
-    int i;
-
-    /* Algoritma */
-    MakeEmptyMap(&My);
-    for (i = 0; i<= Length(Mx); i++) {
-        My.contents[i] = Mx.contents[i];
+int ArrayOfCharToInt (Kata CKata, int *result){
+    int i, temp, multiplier;
+    temp = CKata.Length;
+    multiplier = 10;
+    *result = ((int) CKata.TabKata[temp] - 48);
+    for (i = temp - 1; i > 0; i--){
+        *result += ((int) CKata.TabKata[i] - 48) * multiplier;
+        multiplier = multiplier * 10;
     }
 }
 
-
-void ShowMap (Map M)
-{
-    /* Kamus Lokal */
-    int i;
-
-    /* Algoritma */
-    for (i = 0; i <= Length(M); i++) {
-        printf("%d", M.contents[i]);
+void KonfigurasiToMap (Map *Map){
+    int t, i, j, k;
+    STARTKATA();
+    ArrayOfCharToInt(CKata, &t);
+    (*Map).PanjangMap = t;
+    IgnoreBlank();
+    for (i = 1; i <= (*Map).PanjangMap; i++){
+        (*Map).TabMap[i].Alamat = i;
+        (*Map).TabMap[i].IsiPetak = CC;
+        ADV();
+    }
+    ADVKATA();
+    ArrayOfCharToInt(CKata, &t);
+    (*Map).MaxRoll = t;
+    ADVKATA();
+    ArrayOfCharToInt(CKata, &t);
+    (*Map).JumlahTeleporter = t;
+    for (k = 1; k <= (*Map).JumlahTeleporter; k++){
+        (*Map).TabMap[k].Teleporter = -1;
+    }
+    int Lokasi, Tujuan;
+    for (j = 1; j <= (*Map).JumlahTeleporter; j++){
+        ADVKATA();
+        ArrayOfCharToInt(CKata, &Lokasi);
+        ADVKATA();
+        ArrayOfCharToInt(CKata, &Tujuan);
+        (*Map).TabMap[Lokasi].Teleporter = Tujuan;
     }
 }
 
+void SalinMap (Map *Mx, Map *My){
+    int i;
+    for (i = 1; i <= (*Mx).PanjangMap; i++){
+    	(*My).TabMap[i].IsiPetak = (*Mx).TabMap[i].IsiPetak;	
+    }
+}
