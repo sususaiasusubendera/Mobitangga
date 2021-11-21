@@ -1,15 +1,18 @@
+/* File: mesinkata.h */
+/* Definisi Mesin Kata: Model Akuisisi Versi I */
+
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
 #include "../boolean.h"
 #include "mesinkar.h"
 
-#define NMax 100
+#define NMax 110
 #define BLANK ' '
 
 typedef struct {
-  char TabKata[NMax+1]; /* container penyimpan kata, indeks yang dipakai [1..NMax] */
-    int Length;
+   char TabKata[NMax+1]; /* container penyimpan kata, indeks yang dipakai [1..NMax] */
+   int Length;
 } Kata;
 
 /* State Mesin Kata */
@@ -19,7 +22,7 @@ extern Kata CKata;
 void IgnoreBlank();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
-   F.S. : CC ≠ BLANK atau CC = MARK */
+   F.S. : CC ? BLANK atau CC = MARK */
 
 void SalinKata();
 /* Mengakuisisi kata, menyimpan dalam CKata
@@ -29,7 +32,7 @@ void SalinKata();
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
           
-void STARTKATA(int type);
+void STARTKATA();
 /* I.S. : CC sembarang
    F.S. : EndKata = true, dan CC = MARK;
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
@@ -42,7 +45,5 @@ void ADVKATA();
           Jika CC = MARK, EndKata = true.
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 
-void PrintKata(Kata kata);
-/* Mengeluarkan output dari mesin kata */
 
 #endif
