@@ -1,42 +1,27 @@
+#ifndef __MAP_H__
+#define __MAP_H__
 
-#include "../boolean.h"
+#include "mesinkar.h"
+#include "mesinkata.h"
+#include <stdio.h>
 
-#ifndef MAP_H
-#define MAP_H
+typedef struct {
+    int Alamat;
+    char IsiPetak;
+    int Teleporter;
+} Petak;
 
-
-/* Panjang maksimum peta Mobitangga */
-#define Max_Length 100
-
-typedef char ElTypeMap;
-typedef struck {
-    ElTypeMap contents [Max_Length];
-    int Neff;
+typedef struct {
+    int PanjangMap;
+    int MaxRoll;
+    int JumlahTeleporter;
+    Petak TabMap[100 + 1];
 } Map;
 
-/* Selektor Map */
-#define Lenght(M) (M).Neff
+int ArrayOfCharToInt (Kata CKata, int *result);
 
-/* ***** KONSTRUKTOR UNTUK MAP ***** */
-/* Konstruktor : create peta kosong */
-void MakeEmptyMap (Map *M);
-/* I.S. terdapat nilai n yang valid sebagai memori dari Map */
-/* F.S. terbentuk sebuah array Map M dengan ukuran Neff = 0 */
+void KonfigurasiToMap (Map *Map);
 
+void SalinMap (Map *Mx, Map *My);
 
-/* ***** TES PETA KOSONG ***** */
-boolean IsEmptyMap (Map M);
-/* Mengirimkan true jika Map kosong */
-
-/* ***** PROSES SEMUA ELEMEN ARRAY MAP ***** */
-void SalinMap (Map Mx, Map My);
-/* I.S. array Map Mx terdefisini */
-/* F.S. array Map My berisikan elemen yang sama persis dengan Map Mx */
-
-
-void ShowMap (Map M);
-/* I.S. sebuah array Map M terdefinisi */
-/* F.S. menuliskan elemen array Map M ke layar */
-
-
-#endif // MAP_H
+#endif
