@@ -3,51 +3,53 @@
 
 boolean EndKata;
 Kata CKata;
-
-void IgnoreBlank(){
-   while (CC == BLANK) {
-       ADV();
-   }
+void IgnoreBlank()
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : CC sembarang
+   F.S. : CC ? BLANK atau CC = MARK */
+{
+    while (CC == BLANK || (!EOP) && (CC == MARK)){
+        ADV();
+    }
 }
-
-void SalinKata(){
-    //KAMUS//
+void SalinKata() //pokoknya tadi letak salahnya disini
+/* Mengakuisisi kata, menyimpan dalam CKata
+   I.S. : CC adalah karakter pertama dari kata
+   F.S. : CKata berisi kata yang sudah diakuisisi;
+          CC = BLANK atau CC = MARK;
+          CC adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+{
     int i;
-    //ALGORITMA//
-    i = 0;
-    while ((CC != MARK) && (CC != BLANK)) {
+    i = 1; //NOTEEEEEE!!!! awalnya make nol ternyata salah 
+    while ((CC!=BLANK) && (CC!= MARK) && (!EOP) && (i<= NMax)){
         CKata.TabKata[i] = CC;
         ADV();
         i++;
-    } /* CC = MARK or CC = BLANK */
-    CKata.Length = i;
+    }
+    CKata.Length = i-1;
 }
-
-void STARTKATA(int type){
-    START(type);
+void STARTKATA()
+/* I.S. : CC sembarang
+   F.S. : EndKata = true, dan CC = MARK;
+          atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
+          CC karakter pertama sesudah karakter terakhir kata */
+{
+    START();
     IgnoreBlank();
-    if (CC == MARK) {
-        EndKata = 1;
-    } else {
-        EndKata = 0;
+    if ((CC!=MARK) && (!EOP) && (CC!=BLANK)){
         SalinKata();
-        IgnoreBlank();
     }
 }
-
-void ADVKATA(){
+void ADVKATA()
+/* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
+   F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
+          CC adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika CC = MARK, EndKata = true.
+   Proses : Akuisisi kata menggunakan procedure SalinKata */
+{
     IgnoreBlank();
-    if (CC == MARK) {
-        EndKata = 1;
-    } else {
+    if (((CC!=MARK) && (!EOP) && (CC!=BLANK))){
         SalinKata();
-        IgnoreBlank();
     }
-}
-
-void PrintKata(Kata kata){
-    for(int i = 0; i <= kata.Length; i++){
-        printf("%c", kata.TabKata[i]);
-    }
-    printf("\n");
 }
