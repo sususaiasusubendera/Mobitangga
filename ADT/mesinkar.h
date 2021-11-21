@@ -1,15 +1,17 @@
-#ifndef __MESIN_KAR_H_
-#define __MESIN_KAR_H_
+/* File: mesinkar.h */
+/* Definisi Mesin Karakter */
+
+#ifndef __MESINKAR_H_
+#define __MESINKAR_H_
 
 #include "../boolean.h"
 
-#define MARK ','
+#define MARK '\n'
 /* State Mesin */
 extern char CC;
 extern boolean EOP;
-extern char filename [100];
 
-void START(int type);
+void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
