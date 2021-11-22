@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "game_flow.h"
+#include "ADT/game_flow.h"
+#include "FUNGSI/pre.c"
 
 int main(){
 	boolean endGame;
