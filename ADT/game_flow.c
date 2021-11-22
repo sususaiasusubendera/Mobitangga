@@ -9,7 +9,7 @@
 #include "mesinkar.h"
 #include "mesinkata.h"
 #include "player.h"
-#include "roll.h"
+#include "../FUNGSI/roll.h"
 
 boolean game (boolean endGame){
 	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, ganda;
