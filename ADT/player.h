@@ -8,7 +8,6 @@ typedef struct {
     char Nama[100];
     int CPosition;
     List Skill;
-    List Buff;
 } Player;
 
 typedef struct {
