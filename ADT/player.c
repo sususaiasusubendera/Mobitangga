@@ -3,20 +3,19 @@
 
 void MakePlayer (Player *P){
 	printf("Masukkan nama player: ");
-    gets((*P).Nama);
+    scanf("%s", (*P).Nama);
     printf("Selamat Datang di Game MobiTangga ");
     printf("%s\n", ((*P).Nama));
     (*P).CPosition = 1;
-    CreateEmpty(&((*P).Buff));
     CreateEmpty(&((*P).Skill));
 };
 
 void MakeTabPlayer (TabPlayer *TPlayer, int neff){
-    int i;
+    int j;
     (*TPlayer).Neff = neff;
-    for (i = 1; i <= neff; i++){
-        MakePlayer(&((*TPlayer).TI[i]));
+    for (j = 1; j <= neff; j++){
+        MakePlayer(&((*TPlayer).TI[j]));
         printf("Kamu adalah player ");
-        printf("%d\n", i);
+        printf("%d\n", j);
     }
 }
