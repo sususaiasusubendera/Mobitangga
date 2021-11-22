@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ADT/game_flow.h"
-#include "FUNGSI/pre.c"
+#include "FUNGSI/pre.h"
 
 int main(){
 	boolean endGame;
