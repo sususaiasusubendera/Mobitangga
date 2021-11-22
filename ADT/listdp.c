@@ -366,7 +366,7 @@ void NambahSkill (List *L, int a){
     	}
     	else if (a == 6){ 
         	skill = 5;
-        	printf("Mesin Penukar Hoki\n");
+        	printf("Mesin Penukar Posisi\n");
     	}  
     	else if (a >= 7){ 
         	skill = 0; // skill 6 tidak masuk ke dalam list
@@ -405,7 +405,7 @@ void PrintSkill (List L){
 	P = First(L);
 	puts("Kamu memiliki skill:");
 	while (P != Nil){
-		printf("%d .", i);
+		printf("%d. ", i);
 		if (Info(P) == 1){
             printf("Pintu Ga Ke Mana Mana\n");
         }
@@ -424,5 +424,65 @@ void PrintSkill (List L){
         P = Next(P);
 		i += 1;
 	}
-	printf("\n");
+};
+
+int getSkill (List L, int a){
+	address P;
+	int i, buff;
+	P = First(L);
+	if (a > 0){
+		for (i = 1; i < a; i++){
+			P = Next(P);
+		}
+		printf("Kamu memakai skill ");
+		if (Info(P) == 1){
+            printf("Pintu Ga Ke Mana Mana.\n");
+    		buff = 1;
+    		return buff;
+        }
+        else if (Info(P) == 2){
+            printf("Cermin Pengganda.\n");
+            buff = 2;
+            return buff;
+        }
+        else if (Info(P) == 3){
+            printf("Senter Pembesar Hoki.\n");
+            buff = 3;
+            return buff;
+        }
+        else if (Info(P) == 4){
+            printf("Senter Pengecil Hoki.\n");
+            buff = 4;
+            return buff;
+        }
+        else if (Info(P) == 5){
+            printf("Mesin Penukar Posisi.\n");
+            puts("Pilih pemain yang ingin ditukar posisinya\n");
+            buff = 5;
+            return buff;
+        }
+	}
+	else{
+		a = abs(a);
+		for (i = 1; i < a; i++){
+			P = Next(P);
+		}
+		printf("Kamu membuang skill ");
+		if (Info(P) == 1){
+            printf("Pintu Ga Ke Mana Mana.\n");
+        }
+        else if (Info(P) == 2){
+            printf("Cermin Pengganda.\n");
+        }
+        else if (Info(P) == 3){
+            printf("Senter Pembesar Hoki.\n");
+        }
+        else if (Info(P) == 4){
+            printf("Senter Pengecil Hoki.\n");
+        }
+        else if (Info(P) == 5){
+            printf("Mesin Penukar Posisi.\n");
+        }
+	}
+	return 0;
 };
