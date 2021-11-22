@@ -148,4 +148,6 @@ void BuangSkill (List *L, int a);
 
 void PrintSkill (List L);
 
+int getSkill (List L, int a);
+
 #endif
