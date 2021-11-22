@@ -13,7 +13,6 @@
 #include "mesinkata.h"
 #include "player.h"
 #include "../FUNGSI/roll.h"
-#include "../boolean.h"
 
 #define MaxCommand 20
 
@@ -22,5 +21,7 @@ boolean game(boolean endGame);
 void CMap(Map peta, TabPlayer gemink);
 
 void CBuff(boolean immune, int buffRoll);
+
+void CInspect(Map peta);
 
 #endif
