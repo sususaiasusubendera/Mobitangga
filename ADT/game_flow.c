@@ -12,9 +12,9 @@
 #include "../FUNGSI/roll.h"
 
 boolean game (boolean endGame){
-	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, ganda;
+	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, ganda, endTurn, posisi;
 	char command[MaxCommand];
-	boolean immune, endTurn;
+	boolean immune;
 	TabPlayer gemink;
 	printf("Masukan jumlah pemain : ");
 	scanf("%d", &n);
@@ -24,7 +24,7 @@ boolean game (boolean endGame){
 	KonfigurasiToMap(&hayu);
 	i = 1;
 	while (!endGame){
-		int buffRoll, buff, doneRoll;
+		int buffRoll, buff, doneRoll, j;
 		printf("Giliran Kamu %s\n", (gemink.TI[i].Nama));
 		maxRoll = hayu.MaxRoll;
 		immune = false;
@@ -36,7 +36,8 @@ boolean game (boolean endGame){
 		buff = 0;
 		printf("Masukan command : ");
 		gets(command);
-		while (strcmp(command, "ENDTURN") != 0 && doneRoll == 0){
+		endTurn = 0;
+		while (endTurn == 0 || doneRoll == 0){
 			if (strcmp(command, "SKILL") == 0){
 				if (NbElmt(gemink.TI[i].Skill) != 0){
 					PrintSkill(gemink.TI[i].Skill);
@@ -61,7 +62,7 @@ boolean game (boolean endGame){
 									countBuff2 = 1;
 									ganda = 0;
 									if (NbElmt(gemink.TI[i].Skill) < 9){
-										while (NbElmt(gemink.TI[i].Skill) < 10 || ganda < 2){
+										while (NbElmt(gemink.TI[i].Skill) < 10 && ganda < 2){
 											b = Rskill(&gemink.TI[i].Skill);
 											NambahSkill(&gemink.TI[i].Skill, b);
 											ganda += 1;
@@ -78,15 +79,20 @@ boolean game (boolean endGame){
 									buffRoll = 4;
 								}
 								else if (buff == 5 && countBuff5 == 0){
-									/* countBuff5 = 1;
-									printf("%d. ", j);
-									printf("%s\n",(gemink.TI[j].Nama));
+									countBuff5 = 1;
+									j = 1;
+									for (j = 1; j <= n; j++){
+										if (j != i){
+											printf("%d. %s\n", j, gemink.TI[j].Nama);
+										}
+									}
 									printf("Masukan pemain: ");
-									scanf("%d", &nomorPemain);
-									while (nomorPemain != j){
-										printf("Masukan pemain: ");
-										scanf("%d", &nomorPemain);
-									} */
+									scanf("%d", &j);
+									posisi = gemink.TI[i].CPosition;
+									gemink.TI[i].CPosition = gemink.TI[j].CPosition;
+									gemink.TI[j].CPosition = posisi;
+									printf("%s berhasil menukar posisi dan berada pada %d\n", gemink.TI[i].Nama, gemink.TI[i].CPosition);
+									CMap(hayu, gemink);
 								}
 							}
 						}
@@ -98,19 +104,19 @@ boolean game (boolean endGame){
 				else{
 					puts("Kamu tidak memiliki skill.");
 				}
+				printf("Masukan command : ");
 			}
 			else if (strcmp(command, "MAP") == 0){
 				CMap(hayu, gemink);
+				printf("Masukan command : ");
 			}
 			else if (strcmp(command, "BUFF") == 0){
 				CBuff(immune, buffRoll);
+				printf("Masukan command : ");
 			}
 			else if (strcmp(command, "INSPECT") == 0){
-				// printf("Masukkan petak : ");
-				// scanf("%d", &cekPetak);
-				// printf("Petak ");
-				// printf("%d ", cekPetak);
-				
+				CInspect(hayu);
+				printf("Masukan command : ");
 			}
 			else if (strcmp(command, "ROLL") == 0 && doneRoll == 0){
 				int prob1, prob2, pilihRoll;
@@ -125,12 +131,12 @@ boolean game (boolean endGame){
 				if (hayu.TabMap[prob1].IsiPetak == '.' && prob1 <= hayu.PanjangMap && hayu.TabMap[prob2].IsiPetak == '.' && prob2 >= 1){
 					bergerak = true;
 					printf("%s dapat maju dan mundur.\n", gemink.TI[i].Nama);
-					printf("Ke mana %s mau bergerak:\n"), gemink.TI[i].Nama;
-					printf("1. %d", prob2);
-					printf("2. %d", prob1);
+					printf("Ke mana %s mau bergerak:\n", gemink.TI[i].Nama);
+					printf("1. %d\n", prob2);
+					printf("2. %d\n", prob1);
 					printf("Masukan pilihan: ");
 					scanf("%d", &pilihRoll);
-					while (pilihRoll != 1 || pilihRoll != 2){
+					while (pilihRoll != 1 && pilihRoll != 2){
 						printf("Masukan pilihan: ");
 						scanf("%d", &pilihRoll);
 					}
@@ -169,14 +175,14 @@ boolean game (boolean endGame){
                     else {
                         printf("%s menemukan teleporter.\n", gemink.TI[i].Nama);
                         if (immune){
-                        	char telep[5];
+                        	char telep;
                             printf("%s memiliki imunitas teleport.\n", gemink.TI[i].Nama);
                             printf("Apakah %s ingin teleport (Y/N)? ", gemink.TI[i].Nama);
-                            gets(telep);
-                            while (strcmp(telep, "Y") != 0 || strcmp(telep, "N") != 0){
+                            scanf("%c", &telep);
+                            while (telep != 'Y' && telep != 'N'){
                                 scanf("%c", &telep);
                         	}
-                            if (strcmp(telep, "Y") == 0){
+                            if (telep == 'Y'){
                                 gemink.TI[i].CPosition = hayu.TabMap[gemink.TI[i].CPosition].Teleporter;
                                 printf("%s teleport ke petak %d.\n", gemink.TI[i].Nama, gemink.TI[i].CPosition);
                             }
@@ -198,11 +204,17 @@ boolean game (boolean endGame){
 					endGame = true;
 					break;
 				}
+				printf("Masukan command : ");
 			}
 			else if (strcmp(command, "UNDO") == 0){
 				// Undo();
+				// printf("Masukan command : ");
+				// gets(command);
 			}
-			printf("Masukan command : ");
+			else if (strcmp(command, "ENDTURN") == 0 && doneRoll == 1){
+				endTurn = 1;
+				break;
+			}
 			gets(command);
 		}
 		i += 1;
@@ -228,7 +240,6 @@ void CMap(Map peta, TabPlayer gemink){
         printf(" %d", gemink.TI[imap].CPosition);
         printf("\n");
     }
-    printf("\n");
 }
 
 void CBuff(boolean immune, int buffRoll){
@@ -239,6 +250,23 @@ void CBuff(boolean immune, int buffRoll){
 		puts("Senter Pembesar Hoki : Hasil roll menjadi antara floor(MaxRoll/2) dan MaxRoll.");
 	}
 	else if (buffRoll == 4){
-		puts("Hasil roll menjadi antara 1 dan floor(MaxRoll/2).");
+		puts("Senter Pengecil Hoki : Hasil roll menjadi antara 1 dan floor(MaxRoll/2).");
+	}
+}
+
+void CInspect(Map peta){
+	int z;
+	printf("Masukan petak: ");
+	scanf("%d", &z);
+	if (peta.TabMap[z].IsiPetak == '#'){
+		printf("Petak %d merupakan petak terlarang.\n", z);
+	}
+	else if (peta.TabMap[z].IsiPetak == '.'){
+		if (peta.TabMap[z].Teleporter == -1){
+			printf("Petak %d merupakan petak kosong.\n", z);
+		}
+		else{
+			printf("Petak %d memiliki teleporter menuju %d.\n", z, peta.TabMap[z].Teleporter);
+		}
 	}
 }
