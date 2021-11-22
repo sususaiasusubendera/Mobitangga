@@ -13,6 +13,7 @@
 #include "mesinkata.h"
 #include "player.h"
 #include "roll.h"
+#include "../boolean.h"
 
 #define MaxCommand 20
 
