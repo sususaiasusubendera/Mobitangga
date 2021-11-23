@@ -28,6 +28,7 @@ boolean game (boolean endGame){
 	i = 1;
 	printf("\nPermainan dimulai...\n");
 	printf("\n");
+	Push(&geminkhistory, gemink);
 	CMap(hayu, gemink);
 	while (!endGame){
 		int buffRoll, buff, doneRoll, j;
