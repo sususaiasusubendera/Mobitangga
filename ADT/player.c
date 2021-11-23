@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 void MakePlayer (Player *P){
-	printf("Masukkan nama player: ");
+	printf("\nMasukkan nama player: ");
     scanf("%s", (*P).Nama);
-    printf("Selamat Datang di Game MobiTangga ");
+    printf("\nSelamat Datang di Game MobiTangga ");
     printf("%s\n", ((*P).Nama));
     (*P).CPosition = 1;
     CreateEmpty(&((*P).Skill));

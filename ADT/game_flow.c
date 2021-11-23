@@ -3,12 +3,14 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include "../boolean.h"
 #include "game_flow.h"
 #include "listdp.h"
 #include "map.h"
 #include "mesinkar.h"
 #include "mesinkata.h"
 #include "player.h"
+#include "stack.h"
 #include "../FUNGSI/roll.h"
 
 boolean game (boolean endGame){
@@ -16,6 +18,7 @@ boolean game (boolean endGame){
 	char command[MaxCommand];
 	boolean immune;
 	TabPlayer gemink;
+	Stack geminkhistory;
 	printf("Masukan jumlah pemain : ");
 	scanf("%d", &n);
 	MakeTabPlayer(&gemink, n);
@@ -23,9 +26,12 @@ boolean game (boolean endGame){
 	Map hayu;
 	KonfigurasiToMap(&hayu);
 	i = 1;
+	printf("\nPermainan dimulai...\n");
+	printf("\n");
+	CMap(hayu, gemink);
 	while (!endGame){
 		int buffRoll, buff, doneRoll, j;
-		printf("Giliran Kamu %s\n", (gemink.TI[i].Nama));
+		printf("\nGiliran Kamu %s\n", (gemink.TI[i].Nama));
 		maxRoll = hayu.MaxRoll;
 		immune = false;
 		buffRoll = 0;
@@ -34,7 +40,7 @@ boolean game (boolean endGame){
 		b = Rskill(&gemink.TI[i].Skill);
 		NambahSkill(&gemink.TI[i].Skill, b);
 		buff = 0;
-		printf("Masukan command : ");
+		printf("\nMasukan command : ");
 		gets(command);
 		endTurn = 0;
 		while (endTurn == 0 || doneRoll == 0){
@@ -104,21 +110,25 @@ boolean game (boolean endGame){
 				else{
 					puts("Kamu tidak memiliki skill.");
 				}
-				printf("Masukan command : ");
+				printf("\nMasukan command : ");
 			}
 			else if (strcmp(command, "MAP") == 0){
+				printf("\n");
 				CMap(hayu, gemink);
-				printf("Masukan command : ");
+				printf("\nMasukan command : ");
 			}
 			else if (strcmp(command, "BUFF") == 0){
+				printf("\n");
 				CBuff(immune, buffRoll);
-				printf("Masukan command : ");
+				printf("\nMasukan command : ");
 			}
 			else if (strcmp(command, "INSPECT") == 0){
+				printf("\n");
 				CInspect(hayu);
-				printf("Masukan command : ");
+				printf("\nMasukan command : ");
 			}
 			else if (strcmp(command, "ROLL") == 0 && doneRoll == 0){
+				printf("\n");
 				int prob1, prob2, pilihRoll;
 				roll = rollDadu(buffRoll, maxRoll);
 				printf("%s ", (gemink.TI[i].Nama));
@@ -203,13 +213,17 @@ boolean game (boolean endGame){
 				if (gemink.TI[i].CPosition == hayu.PanjangMap){
 					endGame = true;
 					break;
+
 				}
-				printf("Masukan command : ");
+				printf("\nMasukan command : ");
 			}
 			else if (strcmp(command, "UNDO") == 0){
-				// Undo();
-				// printf("Masukan command : ");
-				// gets(command);
+				printf("\n");
+				Pop(&geminkhistory, &gemink);
+				printf("UNDO berhasil dilakukan\n");
+				break;
+				//printf("Masukan command : ");
+				//gets(command);
 			}
 			else if (strcmp(command, "ENDTURN") == 0 && doneRoll == 1){
 				endTurn = 1;
@@ -220,6 +234,7 @@ boolean game (boolean endGame){
 		i += 1;
 		if (i > n){
 			i = 1;
+			Push(&geminkhistory, gemink);
 		}
 	}
 }

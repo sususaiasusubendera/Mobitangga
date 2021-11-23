@@ -7,20 +7,20 @@
 
 #include "../boolean.h"
 #include "player.h"
+#include "listdp.h"
 
-#define Nil 0
+#define Nill 0
 #define MaxEl 20
 
 /* Nil adalah stack dengan elemen kosong . */
 /* Karena indeks dalam bhs C dimulai 0 maka tabel dg indeks 0 tidak dipakai */
-typedef int infotype;
-typedef int address;   /* indeks tabel */
+/* indeks tabel */
 /* Contoh deklarasi variabel bertype stack dengan ciri round : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 
 typedef struct {
     TabPlayer playerstate; /* tabel penyimpan state dari pemain */
-    address round;  /* alamat TOP: elemen puncak */
+    int round;  /* alamat TOP: elemen puncak */
 } Stack;
 
 /* Definisi stack S kosong : S.round = Nil */
@@ -31,7 +31,7 @@ typedef struct {
 
 /* Definisi akses dengan Selektor : Set dan Get */
 #define round(S) (S).round
-#define playerstate(S) (S).playerstate[(S).round]
+//#define playerstate(S) (S).playerstate[(S).round]
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
@@ -48,7 +48,7 @@ boolean IsStackFull (Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push (Stack * S, TabPlayer playerstate);
+void Push (Stack * S, TabPlayer P);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. P akan menjadi playerstate yang baru, 
