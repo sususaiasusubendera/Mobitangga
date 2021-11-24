@@ -14,11 +14,12 @@
 #include "../FUNGSI/roll.h"
 
 boolean game (boolean endGame){
-	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, ganda, endTurn, posisi;
+	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, ganda, endTurn, posisi, round;
 	char command[MaxCommand];
 	boolean immune;
 	TabPlayer gemink;
 	Stack geminkhistory;
+	CreateStack(&geminkhistory);
 	printf("Masukan jumlah pemain : ");
 	scanf("%d", &n);
 	MakeTabPlayer(&gemink, n);
@@ -28,9 +29,13 @@ boolean game (boolean endGame){
 	i = 1;
 	printf("\nPermainan dimulai...\n");
 	printf("\n");
-	Push(&geminkhistory, gemink);
 	CMap(hayu, gemink);
+	round = 0;
 	while (!endGame){
+		if (i == 1){
+			round += 1;
+			Push(&geminkhistory, gemink);
+		}
 		int buffRoll, buff, doneRoll, j;
 		printf("\nGiliran Kamu %s\n", (gemink.TI[i].Nama));
 		maxRoll = hayu.MaxRoll;
@@ -228,22 +233,26 @@ boolean game (boolean endGame){
                     printf("\n");
                     Pop(&geminkhistory, &gemink);
                     printf("UNDO berhasil dilakukan\n");
-                    char undo = 'Y';
-                    while (undo != 'N'){
-                        printf("Apakah ingin melakukan UNDO lagi? (Y/N): ");
-                        scanf("%c", &undo);
-                        if (undo == 'Y'){
-							Pop(&geminkhistory, &gemink);
-                        	printf("\nUNDO berhasil dilakukan\n");
+                   	round -= 1;
+                    char undo;
+                    while (round >= 1) {
+                    	printf("Apakah ingin melakukan UNDO lagi? (Y/N): ");
+                    	scanf("%c", &undo);
+                    	if (undo == 'Y'){
+                            Pop(&geminkhistory, &gemink);
+                            printf("\nUNDO berhasil dilakukan\n");
+                            round -= 1;
+                        }
+                        else if (undo == 'N'){
+                        	break;
 						}
-                        
-                    }
-                    
-                }
+					}
+                }  
                 else {
                     printf("\n");
                     Pop(&geminkhistory, &gemink);
                     printf("UNDO berhasil dilakukan\n");
+                    round -= 1;
                 }
 				immune = false;
 				countBuff2 = 0;
@@ -261,7 +270,6 @@ boolean game (boolean endGame){
 		i += 1;
 		if (i > n){
 			i = 1;
-			Push(&geminkhistory, gemink);
 		}
 	}
 }
