@@ -10,7 +10,7 @@
 #include "listdp.h"
 
 #define Nill 0
-#define MaxEl 20
+#define MaxEl 50
 
 /* Nil adalah stack dengan elemen kosong . */
 /* Karena indeks dalam bhs C dimulai 0 maka tabel dg indeks 0 tidak dipakai */
@@ -48,14 +48,14 @@ boolean IsStackFull (Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push (Stack * S, TabPlayer P);
+void Push(Stack * S, TabPlayer P);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. P akan menjadi playerstate yang baru, 
 skillA dan skillB menjadi p1skill dan p2skill yang baru, round bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop (Stack * S, TabPlayer* P);
+void Pop(Stack * S, TabPlayer * P);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. P adalah nilai dari playerstate yang lama,

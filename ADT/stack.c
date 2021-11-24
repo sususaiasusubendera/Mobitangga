@@ -20,13 +20,13 @@ boolean IsStackFull (Stack S){
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack * S, TabPlayer playerstate){
+void Push(Stack * S, TabPlayer P){
     round(*S)=round(*S)+1;
-    (*S).playerstate = playerstate;
+    (*S).playerstate = P;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack * S, TabPlayer* playerstate){
-    *playerstate = (*S).playerstate;
+void Pop(Stack * S, TabPlayer * P){
+    *P = (*S).playerstate;
     round(*S)=round(*S)-1;
 }

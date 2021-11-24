@@ -222,6 +222,7 @@ boolean game (boolean endGame){
 				printf("\n");
 				Pop(&geminkhistory, &gemink);
 				printf("UNDO berhasil dilakukan\n");
+				i = 0;
 				break;
 				//printf("Masukan command : ");
 				//gets(command);
