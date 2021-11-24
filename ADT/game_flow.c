@@ -47,10 +47,14 @@ boolean game (boolean endGame){
 		while (endTurn == 0 || doneRoll == 0){
 			if (strcmp(command, "SKILL") == 0){
 				if (NbElmt(gemink.TI[i].Skill) != 0){
+					if (countBuff2 < 1){
+						countBuff2 = 0;
+					}
+					if (countBuff5 < 1){
+						countBuff5 = 0;
+					}
 					PrintSkill(gemink.TI[i].Skill);
 					puts("Tekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.");
-					countBuff2 = 0;
-					countBuff5 = 0;
 					while (NbElmt(gemink.TI[i].Skill) > 0){
 						printf("Masukkan skill: ");
 						scanf("%d", &a);
@@ -132,6 +136,7 @@ boolean game (boolean endGame){
 				printf("\n");
 				int prob1, prob2, pilihRoll;
 				roll = rollDadu(buffRoll, maxRoll);
+				buffRoll = 0;
 				printf("%s ", (gemink.TI[i].Nama));
 				printf("mendapatkan angka ");
 				printf("%d\n", roll);
@@ -219,6 +224,10 @@ boolean game (boolean endGame){
 				printf("\nMasukan command : ");
 			}
 			else if (strcmp(command, "UNDO") == 0){
+				immune = false;
+				countBuff2 = 0;
+				countBuff5 = 0;
+				buffRoll = 0;
 				printf("\n");
 				Pop(&geminkhistory, &gemink);
 				printf("UNDO berhasil dilakukan\n");
