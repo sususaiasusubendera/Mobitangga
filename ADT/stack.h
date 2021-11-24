@@ -19,7 +19,7 @@
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 
 typedef struct {
-    TabPlayer playerstate; /* tabel penyimpan state dari pemain */
+    TabPlayer playerstate[MaxEl+1]; /* tabel penyimpan state dari pemain */
     int round;  /* alamat TOP: elemen puncak */
 } Stack;
 
