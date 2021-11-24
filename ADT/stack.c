@@ -22,11 +22,11 @@ boolean IsStackFull (Stack S){
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack * S, TabPlayer P){
     round(*S)=round(*S)+1;
-    (*S).playerstate = P;
+    (*S).playerstate[(*S).round] = P;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 void Pop(Stack * S, TabPlayer * P){
-    *P = (*S).playerstate;
+    *P = (*S).playerstate[(*S).round];
     round(*S)=round(*S)-1;
 }
