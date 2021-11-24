@@ -224,17 +224,31 @@ boolean game (boolean endGame){
 				printf("\nMasukan command : ");
 			}
 			else if (strcmp(command, "UNDO") == 0){
+				if (i == 1) {
+                    printf("\n");
+                    Pop(&geminkhistory, &gemink);
+                    printf("UNDO berhasil dilakukan\n");
+                    char undo = 'Y';
+                    while (undo != 'N'){
+                        printf("Apakah ingin melakukan UNDO lagi? (Y/N): ");
+                        scanf("%c", &undo);
+                        Pop(&geminkhistory, &gemink);
+                        printf("\nUNDO berhasil dilakukan\n");
+                        }
+                    }
+                    
+                }
+                else {
+                    printf("\n");
+                    Pop(&geminkhistory, &gemink);
+                    printf("UNDO berhasil dilakukan\n");
+                }
 				immune = false;
 				countBuff2 = 0;
 				countBuff5 = 0;
 				buffRoll = 0;
-				printf("\n");
-				Pop(&geminkhistory, &gemink);
-				printf("UNDO berhasil dilakukan\n");
 				i = 0;
 				break;
-				//printf("Masukan command : ");
-				//gets(command);
 			}
 			else if (strcmp(command, "ENDTURN") == 0 && doneRoll == 1){
 				endTurn = 1;
