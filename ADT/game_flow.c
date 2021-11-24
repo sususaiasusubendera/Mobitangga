@@ -232,9 +232,11 @@ boolean game (boolean endGame){
                     while (undo != 'N'){
                         printf("Apakah ingin melakukan UNDO lagi? (Y/N): ");
                         scanf("%c", &undo);
-                        Pop(&geminkhistory, &gemink);
-                        printf("\nUNDO berhasil dilakukan\n");
-                        }
+                        if (undo == 'Y'){
+							Pop(&geminkhistory, &gemink);
+                        	printf("\nUNDO berhasil dilakukan\n");
+						}
+                        
                     }
                     
                 }
