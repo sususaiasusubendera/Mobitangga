@@ -12,6 +12,7 @@
 #include "mesinkar.h"
 #include "mesinkata.h"
 #include "player.h"
+#include "stack.h"
 #include "../FUNGSI/roll.h"
 
 #define MaxCommand 20
