@@ -68,7 +68,7 @@ boolean game (boolean endGame){
 					PrintSkill(gemink.TI[i].Skill);
 					puts("Tekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.");
 					while (NbElmt(gemink.TI[i].Skill) > 0){
-						printf("\nMasukkan skill: ");
+						printf("Masukkan skill: ");
 						scanf("%d", &a);
 						if (abs(a) > NbElmt(gemink.TI[i].Skill)){
 							break;
