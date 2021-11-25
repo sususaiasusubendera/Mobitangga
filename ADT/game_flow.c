@@ -11,7 +11,7 @@
 #include "mesinkata.h"
 #include "player.h"
 #include "stack.h"
-#include "../FUNGSI/roll.h"
+#include "../Fungsi/roll.h"
 
 boolean game (boolean endGame){
 	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, ganda, endTurn, posisi, round;

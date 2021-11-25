@@ -1,7 +1,7 @@
 #ifndef __GAME_FLOW_H__
 #define __GAME_FLOW_H__
 
-
+#include "../boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +13,7 @@
 #include "mesinkata.h"
 #include "player.h"
 #include "stack.h"
-#include "../FUNGSI/roll.h"
+#include "../Fungsi/roll.h"
 
 #define MaxCommand 20
 

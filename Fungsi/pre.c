@@ -15,5 +15,5 @@ void intro() {
     	printf("                                              Sebuah permainan ular tangga ala-ala yang ngga ada ular ama tangganya sama sekali\n");
 	printf("------------------------------------------------------------------------------------------------------------------------------------------------");
 	printf("\n");
-}
+};
 
