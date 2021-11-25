@@ -22,19 +22,24 @@ boolean game (boolean endGame){
 	CreateStack(&geminkhistory);
 	printf("Masukan jumlah pemain : ");
 	scanf("%d", &n);
+	puts("");
 	MakeTabPlayer(&gemink, n);
 	START();
 	Map hayu;
 	KonfigurasiToMap(&hayu);
 	i = 1;
 	printf("\nPermainan dimulai...\n");
-	printf("\n");
-	CMap(hayu, gemink);
 	round = 0;
 	while (!endGame){
 		if (i == 1){
 			round += 1;
 			Push(&geminkhistory, gemink);
+			puts("");
+			printf("---------------Ronde %d---------------\n", round);
+			puts("");
+			CMap(hayu, gemink);
+			puts("");
+			puts("-------------------------------------");
 		}
 		int buffRoll, buff, doneRoll, j;
 		printf("\nGiliran Kamu %s\n", (gemink.TI[i].Nama));
@@ -51,6 +56,7 @@ boolean game (boolean endGame){
 		endTurn = 0;
 		while (endTurn == 0 || doneRoll == 0){
 			if (strcmp(command, "SKILL") == 0){
+				puts("");
 				if (NbElmt(gemink.TI[i].Skill) != 0){
 					if (countBuff2 < 1){
 						countBuff2 = 0;
@@ -115,6 +121,9 @@ boolean game (boolean endGame){
 						else{
 							break;
 						}
+						puts("");
+						PrintSkill(gemink.TI[i].Skill);
+						puts("Tekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.");
 					}
 				}
 				else{
@@ -189,7 +198,7 @@ boolean game (boolean endGame){
 				else{
 					printf("%s tidak dapat bergerak.\n", gemink.TI[i].Nama);
 				}
-				if (bergerak){
+				if (bergerak && gemink.TI[i].CPosition != 20){
 					if (hayu.TabMap[gemink.TI[i].CPosition].Teleporter == -1) {
                         printf("%s tidak menemukan teleporter.\n", gemink.TI[i].Nama);
                     }
@@ -223,8 +232,10 @@ boolean game (boolean endGame){
 				doneRoll = 1;
 				if (gemink.TI[i].CPosition == hayu.PanjangMap){
 					endGame = true;
+					puts("");
+					printf("Selamat Player %d dengan Nama %s Telah Memenangkan Game Ini!!!\n", i, gemink.TI[i].Nama);
+					i -= 1;
 					break;
-
 				}
 				printf("\nMasukan command : ");
 			}
@@ -272,6 +283,28 @@ boolean game (boolean endGame){
 			i = 1;
 		}
 	}
+	int selisih, peringkat, simpenj;
+	puts("");
+    puts("==================== PERINGKAT ====================");
+    printf("1. %s\n", gemink.TI[i].Nama);
+    gemink.TI[i].CPosition = 0;
+    peringkat = 2;
+    while (peringkat <= n){
+    	j = 1;
+    	selisih = 20;
+    	while (j <= n){
+    		if (hayu.PanjangMap - gemink.TI[j].CPosition <= selisih){
+    			selisih = hayu.PanjangMap - gemink.TI[j].CPosition;
+    			simpenj = j;
+			}
+			j += 1;
+		}
+		gemink.TI[simpenj].CPosition = 0;
+		printf("%d. %s\n", peringkat, gemink.TI[simpenj].Nama);
+		peringkat += 1;
+	}
+    puts("===================================================");
+    return endGame;
 }
 
 void CMap(Map peta, TabPlayer gemink){
@@ -289,18 +322,18 @@ void CMap(Map peta, TabPlayer gemink){
         }
         printf(" %d", gemink.TI[imap].CPosition);
         printf("\n");
-    }
+    }   
 }
 
 void CBuff(boolean immune, int buffRoll){
 	if (immune){
-		puts("Imunitas Teleport : Ketika masuk teleporter dan memiliki buff ini, muncul pilihan untuk tidak ke mana-mana.");
+		puts("Imunitas Teleport -> Ketika masuk teleporter dan memiliki buff ini, muncul pilihan untuk tidak ke mana-mana.");
 	}
 	if (buffRoll == 3){
-		puts("Senter Pembesar Hoki : Hasil roll menjadi antara floor(MaxRoll/2) dan MaxRoll.");
+		puts("Senter Pembesar Hoki -> Hasil roll menjadi antara floor(MaxRoll/2) dan MaxRoll.");
 	}
 	else if (buffRoll == 4){
-		puts("Senter Pengecil Hoki : Hasil roll menjadi antara 1 dan floor(MaxRoll/2).");
+		puts("Senter Pengecil Hoki -> Hasil roll menjadi antara 1 dan floor(MaxRoll/2).");
 	}
 }
 
