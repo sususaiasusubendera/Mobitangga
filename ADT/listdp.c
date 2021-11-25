@@ -405,7 +405,7 @@ void PrintSkill (List L){
 	P = First(L);
 	puts("Kamu memiliki skill:");
 	while (P != Nil){
-		printf("%d. ", i);
+		printf("   %d. ", i);
 		if (Info(P) == 1){
             printf("Pintu Ga Ke Mana Mana\n");
         }

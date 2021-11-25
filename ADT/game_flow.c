@@ -22,7 +22,7 @@ boolean game (boolean endGame){
 	CreateStack(&geminkhistory);
 	printf("Masukan jumlah pemain : ");
 	scanf("%d", &n);
-	puts("");
+	//puts("");
 	MakeTabPlayer(&gemink, n);
 	START();
 	Map hayu;
@@ -43,6 +43,7 @@ boolean game (boolean endGame){
 		}
 		int buffRoll, buff, doneRoll, j;
 		printf("\nGiliran Kamu %s\n", (gemink.TI[i].Nama));
+		printf("Kamu mendapat skill: \n");
 		maxRoll = hayu.MaxRoll;
 		immune = false;
 		buffRoll = 0;
@@ -67,7 +68,7 @@ boolean game (boolean endGame){
 					PrintSkill(gemink.TI[i].Skill);
 					puts("Tekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.");
 					while (NbElmt(gemink.TI[i].Skill) > 0){
-						printf("Masukkan skill: ");
+						printf("\nMasukkan skill: ");
 						scanf("%d", &a);
 						if (abs(a) > NbElmt(gemink.TI[i].Skill)){
 							break;
@@ -162,8 +163,8 @@ boolean game (boolean endGame){
 					bergerak = true;
 					printf("%s dapat maju dan mundur.\n", gemink.TI[i].Nama);
 					printf("Ke mana %s mau bergerak:\n", gemink.TI[i].Nama);
-					printf("1. %d\n", prob2);
-					printf("2. %d\n", prob1);
+					printf("   1. %d\n", prob2);
+					printf("   2. %d\n", prob1);
 					printf("Masukan pilihan: ");
 					scanf("%d", &pilihRoll);
 					while (pilihRoll != 1 && pilihRoll != 2){
@@ -274,6 +275,7 @@ boolean game (boolean endGame){
 			}
 			else if (strcmp(command, "ENDTURN") == 0 && doneRoll == 1){
 				endTurn = 1;
+				printf("\nGiliran %s selesai.\n", (gemink.TI[i].Nama));
 				break;
 			}
 			gets(command);
