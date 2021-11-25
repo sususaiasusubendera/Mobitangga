@@ -19,3 +19,13 @@ void MakeTabPlayer (TabPlayer *TPlayer, int neff){
         printf("%d\n", j);
     }
 }
+
+void copySkill(List origin, List *copy){
+    List O = origin;
+    while (O.First != Nil){
+        address S;
+        S = Alokasi(Info(O.First));
+        InsertLast(copy,S);
+        O.First = Next(O.First);
+    }
+}

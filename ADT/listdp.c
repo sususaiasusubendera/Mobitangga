@@ -431,30 +431,24 @@ int getSkill (List L, int a){
 		for (i = 1; i < a; i++){
 			P = Next(P);
 		}
-		printf("Kamu memakai skill ");
+
 		if (Info(P) == 1){
-            printf("Pintu Ga Ke Mana Mana.\n");
     		buff = 1;
     		return buff;
         }
         else if (Info(P) == 2){
-            printf("Cermin Pengganda.\n");
             buff = 2;
             return buff;
         }
         else if (Info(P) == 3){
-            printf("Senter Pembesar Hoki.\n");
             buff = 3;
             return buff;
         }
         else if (Info(P) == 4){
-            printf("Senter Pengecil Hoki.\n");
             buff = 4;
             return buff;
         }
         else if (Info(P) == 5){
-            printf("Mesin Penukar Posisi.\n");
-            puts("Pilih pemain yang ingin ditukar posisinya\n");
             buff = 5;
             return buff;
         }

@@ -20,4 +20,6 @@ void MakePlayer (Player *P);
 
 void MakeTabPlayer (TabPlayer *TPlayer, int neff);
 
+void copySkill(List origin, List *copy);
+
 #endif

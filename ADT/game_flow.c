@@ -83,6 +83,8 @@ boolean game (boolean endGame){
 								buff = getSkill(gemink.TI[i].Skill, a);
 								BuangSkill(&gemink.TI[i].Skill, a);
 								if (buff == 2 && countBuff2 == 0){
+									printf("Kamu memakai skill ");
+									printf("Cermin Pengganda.\n");
 									countBuff2 = 1;
 									ganda = 0;
 									if (NbElmt(gemink.TI[i].Skill) < 9){
@@ -94,15 +96,24 @@ boolean game (boolean endGame){
 									}	
 								}
 								else if (buff == 1){
+									printf("Kamu memakai skill ");
+									printf("Pintu Ga Ke Mana Mana.\n");
 									immune = true;
 								}
 								else if (buff == 3){
+									printf("Kamu memakai skill ");
+									printf("Senter Pembesar Hoki.\n");
 									buffRoll = 3;
 								}
 								else if (buff == 4){
+									printf("Kamu memakai skill ");
+									printf("Senter Pengecil Hoki.\n");
 									buffRoll = 4;
 								}
 								else if (buff == 5 && countBuff5 == 0){
+									printf("Kamu memakai skill ");
+									printf("Mesin Penukar Posisi.\n");
+            						puts("Pilih pemain yang ingin ditukar posisinya :\n");
 									countBuff5 = 1;
 									j = 1;
 									for (j = 1; j <= n; j++){
@@ -110,12 +121,14 @@ boolean game (boolean endGame){
 											printf("%d. %s\n", j, gemink.TI[j].Nama);
 										}
 									}
-									printf("Masukan pemain: ");
+									printf("\nMasukan pemain: ");
 									scanf("%d", &j);
+									puts("");
 									posisi = gemink.TI[i].CPosition;
 									gemink.TI[i].CPosition = gemink.TI[j].CPosition;
 									gemink.TI[j].CPosition = posisi;
 									printf("%s berhasil menukar posisi dan berada pada %d\n", gemink.TI[i].Nama, gemink.TI[i].CPosition);
+									printf("\nPosisi pemain saat ini: \n");
 									CMap(hayu, gemink);
 								}
 							}

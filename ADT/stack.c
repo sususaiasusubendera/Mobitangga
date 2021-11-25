@@ -23,6 +23,11 @@ boolean IsStackFull (Stack S){
 void Push(Stack * S, TabPlayer P){
     round(*S)=round(*S)+1;
     (*S).playerstate[(*S).round] = P;
+    for (int i = 1; i <= (P).Neff; i++) {
+        (*S).playerstate[(*S).round].TI[i].Skill.First = Nil ;
+        (*S).playerstate[(*S).round].TI[i].Skill.Last = Nil ;
+        copySkill(P.TI[i].Skill, &(*S).playerstate[(*S).round].TI[i].Skill) ;
+    }
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
