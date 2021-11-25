@@ -13,18 +13,21 @@ buff = 5 -> Mesin Penukar Posisi
 #include "roll.h"
 
 int rollDadu(int buff, int MaxRoll){
-	int MinRoll, Roll, i, result;
+	srand((unsigned)time(0));
+	int MinRoll, Roll;
 	MinRoll = 1;
+	Roll = (rand() % MaxRoll) + MinRoll;
 	if (buff == 3){
-		MinRoll = floor(MaxRoll/2);
+		MinRoll = MaxRoll/2;
+		if (Roll <= MinRoll){
+			Roll += MinRoll;
+		}
 	}
 	else if (buff == 4){
-		MaxRoll = floor(MaxRoll/2);
+		MaxRoll = MaxRoll/2;
+		if (Roll > MaxRoll){
+			Roll -= MaxRoll;
+		}
 	}
-	srand((unsigned)time(0));
-	for (i = 1; i < MaxRoll; i++){
-		Roll = (rand() % (MaxRoll - MinRoll + 1)) + MinRoll;
-	}
-	result = ((result + Roll) % ((MaxRoll - MinRoll + 1)) + MinRoll);
-	return result;
+	return Roll;
 }

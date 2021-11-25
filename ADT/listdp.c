@@ -294,13 +294,10 @@ void PrintBackward (List L){
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
 int Rskill (List *L){
-	int a, i, result;
+	int a;
 	srand((unsigned) (time(0)));
-	for (i = 1; i < 10; i++){
-		a = rand() % 10;
-	}
-	result = (result + a) % 10;
-	return result;
+	a = rand() % 10;
+	return a;
 };
 /* 
 1. Pintu Ga Ke Mana Mana 10%, 0

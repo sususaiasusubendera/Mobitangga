@@ -22,7 +22,6 @@ boolean game (boolean endGame){
 	CreateStack(&geminkhistory);
 	printf("Masukan jumlah pemain : ");
 	scanf("%d", &n);
-	//puts("");
 	MakeTabPlayer(&gemink, n);
 	START();
 	Map hayu;
@@ -33,7 +32,9 @@ boolean game (boolean endGame){
 	while (!endGame){
 		if (i == 1){
 			round += 1;
-			Push(&geminkhistory, gemink);
+			if (round == 1){
+				Push(&geminkhistory, gemink);
+			}
 			puts("");
 			printf("---------------Ronde %d---------------\n", round);
 			puts("");
@@ -53,7 +54,7 @@ boolean game (boolean endGame){
 		NambahSkill(&gemink.TI[i].Skill, b);
 		buff = 0;
 		printf("\nMasukan command : ");
-		gets(command);
+		scanf("%s", command);
 		endTurn = 0;
 		while (endTurn == 0 || doneRoll == 0){
 			if (strcmp(command, "SKILL") == 0){
@@ -122,9 +123,11 @@ boolean game (boolean endGame){
 						else{
 							break;
 						}
-						puts("");
-						PrintSkill(gemink.TI[i].Skill);
-						puts("Tekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.");
+						if (NbElmt(gemink.TI[i].Skill) > 0){
+							puts("");
+							PrintSkill(gemink.TI[i].Skill);
+							puts("Tekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.");
+						}
 					}
 				}
 				else{
@@ -249,6 +252,7 @@ boolean game (boolean endGame){
                     char undo;
                     while (round >= 1) {
                     	printf("Apakah ingin melakukan UNDO lagi? (Y/N): ");
+			getchar();
                     	scanf("%c", &undo);
                     	if (undo == 'Y'){
                             Pop(&geminkhistory, &gemink);
@@ -256,6 +260,7 @@ boolean game (boolean endGame){
                             round -= 1;
                         }
                         else if (undo == 'N'){
+				Push(&geminkhistory, gemink);
                         	break;
 						}
 					}
@@ -278,10 +283,11 @@ boolean game (boolean endGame){
 				printf("\nGiliran %s selesai.\n", (gemink.TI[i].Nama));
 				break;
 			}
-			gets(command);
+			scanf("%s", command);
 		}
 		i += 1;
 		if (i > n){
+			Push(&geminkhistory, gemink);
 			i = 1;
 		}
 	}

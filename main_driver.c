@@ -3,21 +3,26 @@
 #include <string.h>
 #include "./ADT/game_flow.h"
 #include "./Fungsi/pre.h"
+#include "boolean.h"
+
+void intro();
+
+boolean game(boolean endGame);
 
 int main(){
 	boolean endGame;
 	intro();
 	char command[MaxCommand];
-	puts("1. NEW GAME");
+	puts("1. NEWGAME");
 	puts("2. EXIT");
 	printf("Masukan command : ");
-	gets(command);
+	scanf("%s", command);
 	endGame = false;
-	while (strcmp(command, "NEW GAME") != 0 && strcmp(command, "EXIT") != 0){
+	while (strcmp(command, "NEWGAME") != 0 && strcmp(command, "EXIT") != 0){
 		printf("Masukan command : ");
-		gets(command);
+		scanf("%s", command);
 	}
-	if (strcmp(command, "NEW GAME") == 0){
+	if (strcmp(command, "NEWGAME") == 0){
 		while (!endGame){
 			endGame = game(endGame);
 		}
