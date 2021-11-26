@@ -51,6 +51,8 @@ boolean game (boolean endGame){
 		b = Rskill(&gemink.TI[i].Skill);
 		NambahSkill(&gemink.TI[i].Skill, b);
 		buff = 0;
+		countBuff2 = 0;
+		countBuff5 = 0;
 		printf("\nMasukan command : ");
 		scanf("%s", command);
 		endTurn = 0;
