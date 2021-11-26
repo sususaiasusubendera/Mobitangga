@@ -30,7 +30,7 @@ void KonfigurasiToMap (Map *Map){
     ADVKATA();
     ArrayOfCharToInt(CKata, &t);
     (*Map).JumlahTeleporter = t;
-    for (k = 1; k <= (*Map).JumlahTeleporter; k++){
+    for (k = 1; k <= (*Map).PanjangMap; k++){
         (*Map).TabMap[k].Teleporter = -1;
     }
     int Lokasi, Tujuan;
