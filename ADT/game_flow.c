@@ -32,9 +32,7 @@ boolean game (boolean endGame){
 	while (!endGame){
 		if (i == 1){
 			round += 1;
-			if (round == 1){
-				Push(&geminkhistory, gemink);
-			}
+			Push(&geminkhistory, gemink);
 			puts("");
 			printf("---------------Ronde %d---------------\n", round);
 			puts("");
@@ -272,7 +270,6 @@ boolean game (boolean endGame){
                             round -= 1;
                         }
                         else if (undo == 'N'){
-				Push(&geminkhistory, gemink);
                         	break;
 						}
 					}
@@ -299,7 +296,6 @@ boolean game (boolean endGame){
 		}
 		i += 1;
 		if (i > n){
-			Push(&geminkhistory, gemink);
 			i = 1;
 		}
 	}
