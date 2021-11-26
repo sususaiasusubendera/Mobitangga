@@ -25,4 +25,6 @@ void CBuff(boolean immune, int buffRoll);
 
 void CInspect(Map peta);
 
+int RandomNum(int b);
+
 #endif

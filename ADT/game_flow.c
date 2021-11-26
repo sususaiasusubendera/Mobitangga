@@ -14,7 +14,7 @@
 #include "../Fungsi/roll.h"
 
 boolean game (boolean endGame){
-	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, ganda, endTurn, posisi, round;
+	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, endTurn, posisi, round;
 	char command[MaxCommand];
 	boolean immune;
 	TabPlayer gemink;
@@ -86,13 +86,12 @@ boolean game (boolean endGame){
 									printf("Kamu memakai skill ");
 									printf("Cermin Pengganda.\n");
 									countBuff2 = 1;
-									ganda = 0;
 									if (NbElmt(gemink.TI[i].Skill) < 9){
-										while (NbElmt(gemink.TI[i].Skill) < 10 && ganda < 2){
-											b = Rskill(&gemink.TI[i].Skill);
-											NambahSkill(&gemink.TI[i].Skill, b);
-											ganda += 1;
-										}
+										b = Rskill(&gemink.TI[i].Skill);
+										NambahSkill(&gemink.TI[i].Skill, b);
+										b = Rskill(&gemink.TI[i].Skill);
+										b = RandomNum(b);
+										NambahSkill(&gemink.TI[i].Skill, b);
 									}	
 								}
 								else if (buff == 1){
@@ -373,4 +372,9 @@ void CInspect(Map peta){
 			printf("Petak %d memiliki teleporter menuju %d.\n", z, peta.TabMap[z].Teleporter);
 		}
 	}
+}
+
+int RandomNum(int b){
+	b = (b + rand()) % 10;
+	return b;
 }
