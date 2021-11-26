@@ -57,7 +57,7 @@ boolean game (boolean endGame){
 		scanf("%s", command);
 		endTurn = 0;
 		while (endTurn == 0 || doneRoll == 0){
-			if (strcmp(command, "SKILL") == 0){
+			if (strcmp(command, "SKILL") == 0 && doneRoll == 0){
 				puts("");
 				if (NbElmt(gemink.TI[i].Skill) != 0){
 					if (countBuff2 < 1){
