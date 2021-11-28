@@ -3,6 +3,7 @@
 #include <string.h>
 #include "./ADT/game_flow.h"
 #include "./Fungsi/pre.h"
+#include "./Fungsi/post.h"
 #include "boolean.h"
 
 void intro();
@@ -27,9 +28,11 @@ int main(){
 			endGame = game(endGame);
 		}
 		puts("Terima kasih telah memainkan game ini :)\n");
+		outro();
 	}
 	else{
 		puts("Terima kasih telah memainkan game ini :)\n");
+		outro();
 	}
 	return 0;
 }

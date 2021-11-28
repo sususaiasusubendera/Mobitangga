@@ -20,7 +20,7 @@ typedef struct {
 
 int ArrayOfCharToInt (Kata CKata, int *result);
 
-void KonfigurasiToMap (Map *Map);
+void KonfigurasiToMap (Map *Map, char* locate);
 
 void SalinMap (Map *Mx, Map *My);
 

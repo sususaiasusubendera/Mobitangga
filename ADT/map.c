@@ -13,9 +13,9 @@ int ArrayOfCharToInt (Kata CKata, int *result){
     }
 }
 
-void KonfigurasiToMap (Map *Map){
+void KonfigurasiToMap (Map *Map, char* locate){
     int t, i, j, k;
-    STARTKATA();
+    STARTKATA(locate);
     ArrayOfCharToInt(CKata, &t);
     (*Map).PanjangMap = t;
     IgnoreBlank();

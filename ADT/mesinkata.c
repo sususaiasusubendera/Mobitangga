@@ -29,13 +29,13 @@ void SalinKata() //pokoknya tadi letak salahnya disini
     }
     CKata.Length = i-1;
 }
-void STARTKATA()
+void STARTKATA(char* locate)
 /* I.S. : CC sembarang
    F.S. : EndKata = true, dan CC = MARK;
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 {
-    START();
+    START(locate);
     IgnoreBlank();
     if ((CC!=MARK) && (!EOP) && (CC!=BLANK)){
         SalinKata();

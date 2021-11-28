@@ -16,6 +16,7 @@
 boolean game (boolean endGame){
 	int i, j, a, b, cekPetak, roll, maxRoll, n, countBuff2, countBuff5, endTurn, posisi, round;
 	char command[MaxCommand];
+	char lokasi[50];
 	boolean immune;
 	TabPlayer gemink;
 	Stack geminkhistory;
@@ -23,9 +24,11 @@ boolean game (boolean endGame){
 	printf("Masukan jumlah pemain : ");
 	scanf("%d", &n);
 	MakeTabPlayer(&gemink, n);
-	START();
+	printf("Masukan nama file : ");
+	scanf("%s", lokasi);
+	START(lokasi);
 	Map hayu;
-	KonfigurasiToMap(&hayu);
+	KonfigurasiToMap(&hayu, lokasi);
 	i = 1;
 	printf("\nPermainan dimulai...\n");
 	round = 0;
